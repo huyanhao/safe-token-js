@@ -65,7 +65,7 @@ module.exports = (options = {}, safeToken) => {
             const tokenParse = (name) => {
                 if (typeof name === 'string') {
                     const token = cookies.get(name)
-                    if (token) return safeToken.parse(token)
+                    if (token) return safeToken?.parse(token) ?? token
                 }
                 console.log(`Nonexistence: ${name}, Current cookies: ${[...cookies.keys()]}`)
                 return null
@@ -160,5 +160,6 @@ data(any): 自定义数据。如果未传入SafeToken实例，则data必须为st
 
 
  */
+
 
 
