@@ -1,8 +1,6 @@
 module.exports = (options = {}, safeToken) => {
-    if (!safeToken || safeToken.constructor.name !== 'SafeToken') {
-        safeToken = null
-        console.log('Token Transfer: Simple Mode')
-    }
+    if (!safeToken || safeToken.constructor.name !== 'SafeToken') console.log('Token Transfer: Simple Mode')
+    
     const {
         encoding = 'hex',
         maxAge = 300,
@@ -96,7 +94,7 @@ module.exports = (options = {}, safeToken) => {
         
         res.token = (name, value, options = {}) => {
             const cookies = res.getHeader('Set-Cookie') || []
-            const cookie = [`${nameVerify(name)}=${safeToken ? safeToken.create(value, encoding) : valueVerify(value)}`]
+            const cookie = [`${nameVerify(name)}=${safeToken?.create(value, encoding) ?? valueVerify(value)}`]
 
             if (options.domain) cookie.push(`Domain=${domainVerify(options.domain)}`)
 
@@ -162,4 +160,5 @@ data(any): 自定义数据。如果未传入SafeToken实例，则data必须为st
 
 
  */
+
 
