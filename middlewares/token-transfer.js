@@ -15,8 +15,8 @@ module.exports = (options = {}, safeToken) => {
 
     const nameRegExp = /^[^;=]*$/
     const valueRegExp = /^[^;]*$/
-    const domainRegExp = /^[a-zA-Z\d]+([\-\.]{1}[a-zA-Z\d]+)*\.[a-zA-Z]{2,}$/
-    const pathRegExp = /^[^;]*$/
+    const domainRegExp = /^[a-zA-Z\d]+([-\.]{1}[a-zA-Z\d]+)*\.[a-zA-Z]{2,}$/
+    const pathRegExp = /^(\/{1}[^/;]+)+$/
     const maxAgeRegExp = /^\d+$/
     const encodingVerify = (value) => {
         const list = ['latin1', 'hex', 'base64', 'base64url']
@@ -162,3 +162,4 @@ data(any): 自定义数据。如果未传入SafeToken实例，则data必须为st
 
 
  */
+
