@@ -1,5 +1,8 @@
 module.exports = (options = {}, safeToken) => {
-    if (!safeToken || safeToken.constructor.name !== 'SafeToken') console.log('Token Transfer: Simple Mode')
+    if (!safeToken || safeToken.constructor.name !== 'SafeToken') {
+        safeToken = null
+        console.log('Token Transfer: Simple Mode')
+    }
     const {
         encoding = 'hex',
         maxAge = 300,
@@ -121,8 +124,8 @@ module.exports = (options = {}, safeToken) => {
                 cookie.push(`SameSite=${sameSite}`)
             }
             
-            if (options.priority && priorityVerify(options.priority)) {
-                cookie.push(`Priority=${options.priority}`)
+            if (options.priority) {
+                cookie.push(`Priority=${priorityVerify(options.priority)}`)
             } else {
                 cookie.push(`Priority=${priority}`)
             }
@@ -156,5 +159,6 @@ data(any): 自定义数据。如果未传入SafeToken实例，则data必须为st
     d: undefined,
     e: 11223344556677889900n
 }
+
 
  */
