@@ -61,7 +61,7 @@ class SafeToken {
      * @returns {String}
      */
     create(data, encoding = SafeToken.DEFAULT_ENCODING) {
-        if (!SafeToken.ALLOW_ENCODING.has(encoding)) throw new TypeError(`Invalid argument(encoding): ${encoding}. Allowed: ${SafeToken.ALLOW_ENCODING.join(', ')}`)
+        if (!SafeToken.ALLOW_ENCODING.has(encoding)) throw new TypeError(`Invalid argument(encoding): ${encoding}. Allowed: ${[...SafeToken.ALLOW_ENCODING]}`)
 
         // const _data = JSON.stringify(data)
         const _data = v8.serialize(data)
@@ -113,11 +113,11 @@ class SafeToken {
         }
     }
     key(length = 32, encoding = SafeToken.DEFAULT_ENCODING) {
-        if (!SafeToken.ALLOW_ENCODING.has(encoding)) throw new TypeError(`Invalid argument(encoding): ${encoding}. Allowed: ${SafeToken.ALLOW_ENCODING.join(', ')}`)
+        if (!SafeToken.ALLOW_ENCODING.has(encoding)) throw new TypeError(`Invalid argument(encoding): ${encoding}. Allowed: ${[...SafeToken.ALLOW_ENCODING]}`)
         return crypto.randomBytes(length).toString(encoding)
     }
     hash(data, encoding = SafeToken.DEFAULT_ENCODING) {
-        if (!SafeToken.ALLOW_ENCODING.has(encoding)) throw new TypeError(`Invalid argument(encoding): ${encoding}. Allowed: ${SafeToken.ALLOW_ENCODING.join(', ')}`)
+        if (!SafeToken.ALLOW_ENCODING.has(encoding)) throw new TypeError(`Invalid argument(encoding): ${encoding}. Allowed: ${[...SafeToken.ALLOW_ENCODING]}`)
 
         // const _data = JSON.stringify(data)
         const _data = v8.serialize(data)
@@ -128,7 +128,7 @@ class SafeToken {
     }
     hmac(data, secret = this.#secretKey, encoding = SafeToken.DEFAULT_ENCODING) {
         if (typeof secret !== 'string' && !Buffer.isBuffer(secret)) throw new TypeError(`Invalid argument(secret): ${secret}. Allowed: String, Buffer`)
-        if (!SafeToken.ALLOW_ENCODING.has(encoding)) throw new TypeError(`Invalid argument(encoding): ${encoding}. Allowed: ${SafeToken.ALLOW_ENCODING.join(', ')}`)
+        if (!SafeToken.ALLOW_ENCODING.has(encoding)) throw new TypeError(`Invalid argument(encoding): ${encoding}. Allowed: ${[...SafeToken.ALLOW_ENCODING]}`)
 
         // const _data = JSON.stringify(data)
         const _data = v8.serialize(data)
